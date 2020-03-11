@@ -31,18 +31,18 @@ public class HWOptimizeView extends View {
 
     private String TAG = "HWOptimizeView";
 
-    /*** 外层path */
-    private Path mOuterPath = new Path();
-    /*** 外层count的数量 */
-    private final int OUTER_COUNT = 30;
-    /*** 外层count的数量 */
-    private Paint mOuterPaint = new Paint();
-    /*** 外层颜色 */
-    private int[] mOutColors = {
-            Color.parseColor("#d7d8dc"), Color.parseColor("#5966f7"),
-            Color.parseColor("#5966f7"), Color.parseColor("#5966f7"),
-            Color.parseColor("#5966f7"), Color.parseColor("#5966f7")
+    /*** 上层path */
+    private Path mUpperPath = new Path();
+    /*** 上层count的数量 */
+    private final int UPPER_COUNT = 30;
+    /*** 上层count的数量 */
+    private Paint mUpperPaint = new Paint();
+    /*** 上层颜色 */
+    private int[] mUpperColors = {
+            Color.parseColor("#d7d8dc"), Color.parseColor("#5966f7")
     };
+    /*** 位置 */
+    private float[] positions = {0, 0.25f};
 
     /*** 被覆盖的path */
     private Path mInnerPath = new Path();
@@ -96,14 +96,14 @@ public class HWOptimizeView extends View {
 
         animator = ValueAnimator.ofInt(0, maxValue);
         //设置paint属性
-        mOuterPaint.setStyle(Paint.Style.STROKE);
-        mOuterPaint.setAntiAlias(true);
-        mOuterPaint.setDither(true);
+        mUpperPaint.setStyle(Paint.Style.STROKE);
+        mUpperPaint.setAntiAlias(true);
+        mUpperPaint.setDither(true);
         strokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, strokeWidth,
                 getResources().getDisplayMetrics());
-        mOuterPaint.setStrokeWidth(strokeWidth);
-        mInnerPaint.set(mOuterPaint);
-        mBasePaint.set(mOuterPaint);
+        mUpperPaint.setStrokeWidth(strokeWidth);
+        mInnerPaint.set(mUpperPaint);
+        mBasePaint.set(mUpperPaint);
         mBasePaint.setColor(mBaseColor);
 
         baseStrokeWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, baseStrokeWidth,
@@ -201,13 +201,13 @@ public class HWOptimizeView extends View {
 
     private void initOuterPath() {
         //将rect添加到path中
-        mOuterPath.addArc(mCircleRect, 0, 90);
+        mUpperPath.addArc(mCircleRect, 0, 90);
         //获取PathEffect
-        DashPathEffect dashPathEffect = getPathEffect(mOuterPath, OUTER_COUNT);
-        mOuterPaint.setPathEffect(dashPathEffect);
+        DashPathEffect dashPathEffect = getPathEffect(mUpperPath, UPPER_COUNT);
+        mUpperPaint.setPathEffect(dashPathEffect);
         //设置paint的渐变色
-        Shader shader = new SweepGradient(getWidth() / 2, getHeight() / 2, mOutColors, null);
-        mOuterPaint.setShader(shader);
+        Shader shader = new SweepGradient(getWidth() / 2, getHeight() / 2, mUpperColors, positions);
+        mUpperPaint.setShader(shader);
     }
 
     private void initInnerPath() {
@@ -234,11 +234,13 @@ public class HWOptimizeView extends View {
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, outRadius, mBasePaint);
         mBasePaint.setStrokeWidth(baseStrokeWidth);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, baseRadius, mBasePaint);
-        canvas.drawPath(mInnerPath, mInnerPaint);
 
+        //灰色的圆
+        canvas.drawPath(mInnerPath, mInnerPaint);
+        //蓝色渐变的1/4圆
         canvas.save();
         canvas.rotate(progress, getWidth() / 2, getHeight() / 2);
-        canvas.drawPath(mOuterPath, mOuterPaint);
+        canvas.drawPath(mUpperPath, mUpperPaint);
         canvas.restore();
     }
 
@@ -279,15 +281,15 @@ public class HWOptimizeView extends View {
         return false;
     }
 
-    public boolean isRunning(){
+    public boolean isRunning() {
         return animator.isRunning();
     }
 
     /**
      * 停止
      */
-    public void stop(){
-        if(animator != null && animator.isRunning()){
+    public void stop() {
+        if (animator != null && animator.isRunning()) {
             animator.cancel();
             animator.end();
         }

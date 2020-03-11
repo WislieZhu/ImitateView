@@ -68,8 +68,6 @@ public class CounterView extends View {
 
     private CounterListener mCounterListener;
 
-    private boolean isFinishCount = false;
-
     private Random rd = new Random();
 
     public CounterView(Context context) {
@@ -103,7 +101,7 @@ public class CounterView extends View {
         textHeight = rect.height();
 
         mAnimator = ObjectAnimator.ofFloat(this, "offsetTextY", 0, textHeight);
-        mAnimator.setDuration(1000);
+        mAnimator.setDuration(300);
         mAnimator.setInterpolator(new LinearInterpolator());
         mAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -113,7 +111,6 @@ public class CounterView extends View {
                 if (curValue == 100) {
                     if (mCounterListener != null) {
                         mCounterListener.finishCount();
-                        isFinishCount = true;
                     }
                 }
             }
