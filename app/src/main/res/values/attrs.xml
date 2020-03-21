@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="VivoLoadingView">
+        <attr name="isScaled" format="boolean"/>
+        <attr name="dotCount" format="integer"/>
+        <attr name="isRotated" format="boolean"/>
+        <attr name="refreshDuration" format="integer"/>
+        <!-- 水平间隔 -->
+        <attr name="interval" format="float"/>
+    </declare-styleable>
+</resources>

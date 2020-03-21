@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <com.wislie.customview.vivo.VivoLoadingView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:dotCount="8"
+        app:isRotated="true"
+        app:refreshDuration="65" />
+
+    <com.wislie.customview.vivo.VivoLoadingView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:dotCount="8"
+        app:isRotated="true"
+        app:isScaled="true"
+        app:refreshDuration="65" />
+
+    <!-- 水平方向变化 -->
+    <com.wislie.customview.vivo.VivoLoadingView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:dotCount="3"
+        app:isRotated="false"
+        app:interval="15"
+        app:refreshDuration="250" />
+</LinearLayout>

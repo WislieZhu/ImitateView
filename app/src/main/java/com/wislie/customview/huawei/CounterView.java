@@ -1,4 +1,4 @@
-package com.wislie.customview;
+package com.wislie.customview.huawei;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

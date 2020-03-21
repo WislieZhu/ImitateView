@@ -1,4 +1,4 @@
-package com.wislie.customview;
+package com.wislie.customview.huawei;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -195,6 +195,7 @@ public class HWOptimizeView extends View {
             case MeasureSpec.UNSPECIFIED:
             default:
                 result = size;
+                break;
         }
         return result;
     }

@@ -1,11 +1,10 @@
-package com.wislie.customview;
+package com.wislie.customview.huawei;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 
-import com.wislie.customview.listener.OnOptimizeListener;
 
 /**
  * author : Wislie
